@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Introduction to Web</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet">
+        <style>
+            :root {
+                --bg-color: #0f172a;
+                --container-bg: #1e293b;
+                --text-primary: #f8fafc;
+                --text-secondary: #94a3b8;
+                --accent-primary: #3b82f6;
+                --accent-glow: rgba(59, 130, 246, 0.5);
+                --gradient-start: #3b82f6;
+                --gradient-end: #8b5cf6;
+                --card-border: rgba(255, 255, 255, 0.05);
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: 'Inter', sans-serif;
+                background-color: var(--bg-color);
+                color: var(--text-primary);
+                line-height: 1.6;
+                min-height: 100vh;
+                background-image:
+                    radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 25%),
+                    radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 25%);
+                background-attachment: fixed;
+            }
+
+            header {
+                text-align: center;
+                padding: 4rem 1rem 2rem;
+                margin-bottom: 2rem;
+            }
+
+            h1 {
+                font-size: 3rem;
+                font-weight: 700;
+                background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin-bottom: 1rem;
+                letter-spacing: -0.05em;
+            }
+
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 0 1.5rem 4rem;
+            }
+
+            .section-card {
+                background: var(--container-bg);
+                border: 1px solid var(--card-border);
+                border-radius: 16px;
+                padding: 2.5rem;
+                margin-bottom: 2rem;
+                box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .section-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            h2 {
+                font-size: 1.8rem;
+                color: #fff;
+                margin-bottom: 1rem;
+                border-bottom: 2px solid var(--card-border);
+                padding-bottom: 0.5rem;
+            }
+
+            h5 {
+                font-size: 1.2rem;
+                color: var(--text-primary);
+                margin: 1.5rem 0 0.5rem;
+                font-weight: 600;
+            }
+
+            p {
+                color: var(--text-secondary);
+                margin-bottom: 1rem;
+            }
+
+            a {
+                color: var(--accent-primary);
+                text-decoration: none;
+                position: relative;
+                font-weight: 500;
+                transition: color 0.2s ease;
+            }
+
+            a:hover {
+                color: #60a5fa;
+            }
+
+            a::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                transform: scaleX(0);
+                height: 2px;
+                bottom: -2px;
+                left: 0;
+                background-color: #60a5fa;
+                transform-origin: bottom right;
+                transition: transform 0.25s ease-out;
+            }
+
+            a:hover::after {
+                transform: scaleX(1);
+                transform-origin: bottom left;
+            }
+
+            .task-box {
+                background: rgba(59, 130, 246, 0.1);
+                border-left: 4px solid var(--accent-primary);
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+                border-radius: 0 8px 8px 0;
+            }
+
+            .task-box code {
+                background: rgba(0, 0, 0, 0.3);
+                padding: 0.5rem;
+                border-radius: 4px;
+                display: block;
+                margin-bottom: 1rem;
+                color: #e2e8f0;
+            }
+
+            .task-box span.badge {
+                display: inline-block;
+                background: var(--accent-primary);
+                color: white;
+                padding: 0.2rem 0.6rem;
+                border-radius: 4px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                margin-bottom: 0.5rem;
+            }
+
+            .task-box .solution-badge {
+                background: #10b981;
+                margin-top: 1rem;
+            }
+
+            ul,
+            ol {
+                color: var(--text-secondary);
+                margin: 1rem 0 1rem 2rem;
+            }
+
+            li {
+                margin-bottom: 0.5rem;
+            }
+
+            dl {
+                background: rgba(255, 255, 255, 0.02);
+                padding: 1.5rem;
+                border-radius: 8px;
+                margin: 1rem 0;
+            }
+
+            dt {
+                font-weight: 600;
+                color: var(--text-primary);
+                margin-top: 1rem;
+            }
+
+            dt:first-child {
+                margin-top: 0;
+            }
+
+            dd {
+                color: var(--text-secondary);
+                margin-left: 1.5rem;
+                margin-top: 0.25rem;
+            }
+
+            code {
+                background: rgba(0, 0, 0, 0.2);
+                padding: 0.2rem 0.4rem;
+                border-radius: 4px;
+                color: #e2e8f0;
+                font-family: inherit;
+            }
+
+            /* Form Styles */
+            .demo-form {
+                display: flex;
+                flex-direction: column;
+                gap: 1.25rem;
+                margin-top: 1.5rem;
+            }
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .form-row {
+                display: flex;
+                gap: 1rem;
+            }
+
+            @media (max-width: 600px) {
+                .form-row {
+                    flex-direction: column;
+                }
+            }
+
+            .form-row .form-group {
+                flex: 1;
+            }
+
+            label {
+                font-size: 0.9rem;
+                color: var(--text-primary);
+                font-weight: 500;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            textarea,
+            select {
+                background: rgba(0, 0, 0, 0.2);
+                border: 1px solid var(--card-border);
+                color: var(--text-primary);
+                padding: 0.75rem 1rem;
+                border-radius: 8px;
+                font-family: inherit;
+                font-size: 1rem;
+                transition: border-color 0.2s, box-shadow 0.2s;
+                outline: none;
+                width: 100%;
+            }
+
+            input[type="text"]:focus,
+            input[type="date"]:focus,
+            textarea:focus,
+            select:focus {
+                border-color: var(--accent-primary);
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            }
+
+            textarea {
+                resize: vertical;
+                min-height: 80px;
+            }
+
+            .radio-group {
+                display: flex;
+                gap: 1.5rem;
+                padding: 0.5rem 0;
+            }
+
+            .radio-label {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                cursor: pointer;
+                color: var(--text-secondary);
+            }
+
+            .form-actions {
+                display: flex;
+                gap: 1rem;
+                margin-top: 1rem;
+                padding-top: 1.5rem;
+                border-top: 1px solid var(--card-border);
+                flex-wrap: wrap;
+            }
+
+            button {
+                padding: 0.75rem 1.5rem;
+                border-radius: 8px;
+                font-weight: 600;
+                font-size: 0.95rem;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-family: inherit;
+            }
+
+            button[type="submit"] {
+                background: var(--accent-primary);
+                color: white;
+                border: none;
+                box-shadow: 0 4px 12px var(--accent-glow);
+            }
+
+            button[type="submit"]:hover {
+                background: #2563eb;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px var(--accent-glow);
+            }
+
+            button[type="reset"],
+            button[type="button"] {
+                background: rgba(255, 255, 255, 0.05);
+                color: var(--text-primary);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            button[type="reset"]:hover,
+            button[type="button"]:hover {
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateY(-2px);
+            }
+
+            footer {
+                text-align: center;
+                padding: 2rem;
+                color: var(--text-secondary);
+                font-size: 0.9rem;
+                border-top: 1px solid var(--card-border);
+                margin-top: 2rem;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <header>
+            <h1>Introduction to Web</h1>
+            <p>A comprehensive guide to HTML fundamentals</p>
+        </header>
+
+        <div class="container">
+
+            <div class="section-card">
+                <h2>Anchor Tag</h2>
+                <p>An anchor (<code>&lt;a&gt;</code>) tag is used to create hyperlinks that connect a web page to
+                    another section on the same webpage, to another webpage, or to allow one to upload or download a
+                    file.</p>
+                <p>The <code>&lt;a&gt;</code> tag has an <strong>href</strong> attribute that specifies the destination
+                    or where the user will be taken upon clicking it. A hyperlink can be text, an image, a video, etc.
+                </p>
+
+                <h5>General syntax of an anchor tag</h5>
+                <div class="task-box">
+                    <code>&lt;a href="destination"&gt;target destination&lt;/a&gt;</code>
+                </div>
+
+                <div class="task-box">
+                    <span class="badge">Task</span>
+                    <p>Create a link that when clicked will take the user to the HTML documentation on the anchor tag.
+                    </p>
+
+                    <span class="badge solution-badge">Solution</span>
+                    <p><a href="https://html.com" target="_blank">HTML TAGS</a></p>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h2>HTML Lists</h2>
+                <p>A list is a sequence of items arranged in a particular order, which can be horizontal or vertical.
+                    HTML lists organize items into ordered lists, unordered lists, or definition lists to make
+                    information clear and easy to read.</p>
+                <p>Types of lists in HTML: 1. Ordered list 2. Unordered list 3. Definition list.</p>
+
+                <h5>Ordered List</h5>
+                <p>In an ordered list, sequence of items are labeled using numbers, letters, or roman numerals.</p>
+                <ol>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                </ol>
+
+                <div class="task-box">
+                    <span class="badge">Task</span>
+                    <p>Create a list of 5 common HTML tags.</p>
+
+                    <span class="badge solution-badge">Solution</span>
+                    <ol type="a">
+                        <li>a tag</li>
+                        <li>form tag</li>
+                        <li>table tag</li>
+                        <li>div tag</li>
+                        <li>image tag</li>
+                    </ol>
+                </div>
+
+                <h5>Unordered List</h5>
+                <p>In an unordered list, it uses bulleting instead of numbering or alphabets.</p>
+                <ul style="list-style-type: square;">
+                    <li>table tag</li>
+                    <li>div tag</li>
+                    <li>form tag</li>
+                    <li>image tag</li>
+                    <li>a tag</li>
+                </ul>
+
+                <h5>Definition List</h5>
+                <p>Definition lists are used to define terms.</p>
+                <dl>
+                    <dt>Name</dt>
+                    <dd>Description definition...</dd>
+                </dl>
+
+                <div class="task-box">
+                    <span class="badge">Task</span>
+                    <p>Create a definition list to describe Internet Application Programming.</p>
+
+                    <span class="badge solution-badge">Solution</span>
+                    <dl>
+                        <dt>Internet Application Programming</dt>
+                        <dd>The process of designing and developing software that operates over the internet, typically
+                            accessed via web browsers or network-connected devices.</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h2>Form Tag</h2>
+                <p>HTML forms are used to get input from the user to the web application. These inputs are processed by
+                    the business logic and may be stored in the web database.</p>
+
+                <div class="task-box">
+                    <span class="badge">Task 1</span>
+                    <p>Create a list of all components of HTML forms (using a definition list to capture the part name,
+                        its purpose, and its attributes).</p>
+
+                    <span class="badge solution-badge">Solution 1</span>
+                    <dl>
+                        <dt>&lt;form&gt;</dt>
+                        <dd>The container for all form elements. Key attributes: <code>action</code>,
+                            <code>method</code> (GET/POST).
+                        </dd>
+
+                        <dt>&lt;input&gt;</dt>
+                        <dd>The most common form element used to capture user data. Key attributes: <code>type</code>,
+                            <code>name</code>, <code>value</code>, <code>placeholder</code>, <code>required</code>.
+                        </dd>
+
+                        <dt>&lt;label&gt;</dt>
+                        <dd>Defines a label for form elements to improve accessibility. Key attribute: <code>for</code>
+                            (matches the input's id).</dd>
+
+                        <dt>&lt;textarea&gt;</dt>
+                        <dd>Used for multi-line text input. Key attributes: <code>rows</code>, <code>cols</code>.</dd>
+
+                        <dt>&lt;button&gt;</dt>
+                        <dd>A clickable button to submit, reset, or perform an action. Key attribute: <code>type</code>
+                            (submit/reset/button).</dd>
+                    </dl>
+                </div>
+
+                <div class="task-box">
+                    <span class="badge">Task 2</span>
+                    <p>Create a well-designed form to capture the following dataset: First and Last name, DOB, Gender
+                        (Male/Female), Opinion on the phrase "ubuntu", and Buttons to clear entered data, submit, and
+                        cancel.</p>
+
+                    <span class="badge solution-badge">Solution 2</span>
+                    <form class="demo-form" action="#" method="get">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fname">First Name</label>
+                                <input type="text" id="fname" name="fname" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lname">Last Name</label>
+                                <input type="text" id="lname" name="lname" placeholder="Doe" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dob">Date of Birth</label>
+                                <input type="date" id="dob" name="dob" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="gender" value="male" required> Male
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="gender" value="female"> Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="opinion">Opinion on the phrase "ubuntu"</label>
+                            <textarea id="opinion" name="opinion" placeholder="I am because we are..."
+                                required></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit">Submit Data</button>
+                            <button type="reset">Clear Form</button>
+                            <button type="button">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Web Development Basics. Handcrafted with modern styling.</p>
+        </footer>
+
+    </body>
+
+</html>
